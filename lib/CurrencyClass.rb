@@ -18,26 +18,33 @@ class Currency
     @ccode = ccode
   end
 
-  def ==(other)
-    @amt_to_convert == other.amt_to_convert && @ccode == other.ccode
+  def ==(equalto)
+    @amt_to_convert == equalto.amt_to_convert && @ccode == equalto.ccode
   end
 
-  def !=(other)
-    !(@amt_to_convert == other.amt_to_convert && @ccode == other.ccode)
+  def !=(notequal)
+    !(@amt_to_convert == notequal.amt_to_convert && @ccode == notequal.ccode)
   end
 
-  def +(other)
-    if other.is_a?(Currency)
-      raise DifferentCurrencyCodeError if @ccode != other.ccode
-      Currency.new(@amt_to_convert + other.amt_to_convert, @ccode)
+  def +(add)
+    if add.is_a?(Currency)
+      raise DifferentCurrencyCodeError if @ccode != add.ccode
+      Currency.new(@amt_to_convert + add.amt_to_convert, @ccode)
     end
   end
 
-  def -(other)
-    if other.is_a?(Currency)
-      raise DifferentCurrencyCodeError if @ccode != other.ccode
-      Currency.new(@amt_to_convert - other.amt_to_convert, @ccode)
+  def -(minus)
+    if minus.is_a?(Currency)
+      raise DifferentCurrencyCodeError if @ccode != minus.ccode
+      Currency.new(@amt_to_convert - minus.amt_to_convert, @ccode)
     end
   end
 
+  def *(multiply)
+    if multiply.is_a?(Currency)
+      raise DifferentCurrencyCodeError if multiply.is_a?(Float) == false &&
+      multiply._is_a?(Fixnum) == false
+      Currency.new(@amt_to_convert * multiply, @ccode)
+    end
+  end
 end
