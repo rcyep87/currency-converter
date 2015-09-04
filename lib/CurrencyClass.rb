@@ -23,4 +23,10 @@ class Currency
     # Currency.new(@amt_to_convert + other.amt_to_convert, @ccode)
   end
 
+  def -(other)
+    if other.is_a?(Currency)
+      total_amt = Currency.new(@amt_to_convert - other.amt_to_convert, @ccode)
+    end
+  end
+
 end
