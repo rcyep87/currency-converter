@@ -58,4 +58,12 @@ class CurrencyClassTest < Minitest::Test
       total_amt = currency + currency2
     end
   end
+
+  def test_minus_with_error
+    currency       = Currency.new(100, "USD")
+    currency2      = Currency.new(25, "GPD")
+    assert_raises(DifferentCurrencyCodeError) do
+      total_amt = currency - currency2
+    end
+  end
 end
