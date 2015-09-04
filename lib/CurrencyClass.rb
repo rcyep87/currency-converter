@@ -1,8 +1,14 @@
 class DifferentCurrencyCodeError < StandardError
-  # def message
-  #   puts "You're trying to compare two different currencies. Please try again."
-  # end
+  def message
+    puts "You're trying to compare two different currencies. Please try again."
+  end
 end
+
+# class DidntInitializeClass < StandardError
+#   def message
+#     puts "Make sure you're providing both a dollar amount and currency code!"
+#   end
+# end
 
 class Currency
   attr_reader :amt_to_convert, :ccode
@@ -12,20 +18,25 @@ class Currency
     @ccode = ccode
   end
 
-  def ==(other)  #this is required to make the "No visible difference" error go away
+  def ==(other)
     @amt_to_convert == other.amt_to_convert && @ccode == other.ccode
+  end
+
+  def !=(other)
+    !(@amt_to_convert == other.amt_to_convert && @ccode == other.ccode)
   end
 
   def +(other)
     if other.is_a?(Currency)
-      total_amt = Currency.new(@amt_to_convert + other.amt_to_convert, @ccode)
+      raise DifferentCurrencyCodeError if @ccode != other.ccode
+      Currency.new(@amt_to_convert + other.amt_to_convert, @ccode)
     end
-    # Currency.new(@amt_to_convert + other.amt_to_convert, @ccode)
   end
 
   def -(other)
     if other.is_a?(Currency)
-      total_amt = Currency.new(@amt_to_convert - other.amt_to_convert, @ccode)
+      raise DifferentCurrencyCodeError if @ccode != other.ccode
+      Currency.new(@amt_to_convert - other.amt_to_convert, @ccode)
     end
   end
 

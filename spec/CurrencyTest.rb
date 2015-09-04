@@ -10,8 +10,8 @@ class CurrencyClassTest < Minitest::Test
   end
 
   def test_plus_method
-    currency       = Currency.new(50, "USD") #given i have a currency
-    currency2      = Currency.new(100, "USD") #when i add another currency
+    currency       = Currency.new(50, "USD")
+    currency2      = Currency.new(100, "USD")
     expected       = Currency.new(150, "USD")
     actual         = currency + currency2
     assert_equal(expected, actual)
@@ -49,5 +49,13 @@ class CurrencyClassTest < Minitest::Test
     expected       = Currency.new(-25, "USD")
     actual         = currency - currency2
     assert_equal(expected, actual)
+  end
+
+  def test_plus_with_error
+    currency       = Currency.new(75, "USD")
+    currency2      = Currency.new(25, "GPD")
+    assert_raises(DifferentCurrencyCodeError) do
+      total_amt = currency + currency2
+    end
   end
 end
