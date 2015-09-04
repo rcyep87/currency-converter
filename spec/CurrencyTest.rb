@@ -26,7 +26,7 @@ class CurrencyClassTest < Minitest::Test
   end
 
   def test_custom_error
-    assert(DifferentCurrencyCodeError)  # => true
+    assert(DifferentCurrencyCodeError)
   end
 
   def test_not_equal_method
@@ -40,38 +40,38 @@ class CurrencyClassTest < Minitest::Test
   def test_minus_method
     currency       = Currency.new(75, "USD")
     currency2      = Currency.new(50, "USD")
-    expected       = Currency.new(25, "USD")  
-    actual         = currency - currency2     # => #<Currency:0x007feded0b1f20 @amt_to_convert=25, @ccode="USD">
-    assert_equal(expected, actual)            # => true
+    expected       = Currency.new(25, "USD")
+    actual         = currency - currency2
+    assert_equal(expected, actual)
 
-    currency       = Currency.new(25, "USD")   # => #<Currency:0x007feded0b18e0 @amt_to_convert=25, @ccode="USD">
-    currency2      = Currency.new(50, "USD")   # => #<Currency:0x007feded0b1660 @amt_to_convert=50, @ccode="USD">
-    expected       = Currency.new(-25, "USD")  # => #<Currency:0x007feded0b1368 @amt_to_convert=-25, @ccode="USD">
-    actual         = currency - currency2      # => #<Currency:0x007feded0b1098 @amt_to_convert=-25, @ccode="USD">
-    assert_equal(expected, actual)             # => true
+    currency       = Currency.new(25, "USD")
+    currency2      = Currency.new(50, "USD")
+    expected       = Currency.new(-25, "USD")
+    actual         = currency - currency2
+    assert_equal(expected, actual)
   end
 
   def test_plus_with_error
-    currency       = Currency.new(75, "USD")      # => #<Currency:0x007feded0bbca0 @amt_to_convert=75, @ccode="USD">
-    currency2      = Currency.new(25, "GPD")      # => #<Currency:0x007feded0bb908 @amt_to_convert=25, @ccode="GPD">
+    currency       = Currency.new(75, "USD")
+    currency2      = Currency.new(25, "GPD")
     assert_raises(DifferentCurrencyCodeError) do
       total_amt = currency + currency2
-    end                                           # => #<DifferentCurrencyCodeError: DifferentCurrencyCodeError>
+    end
   end
 
   def test_minus_with_error
-    currency       = Currency.new(100, "USD")     # => #<Currency:0x007feded0b00f8 @amt_to_convert=100, @ccode="USD">
-    currency2      = Currency.new(25, "GPD")      # => #<Currency:0x007feded0b0f80 @amt_to_convert=25, @ccode="GPD">
+    currency       = Currency.new(100, "USD")
+    currency2      = Currency.new(25, "GPD")
     assert_raises(DifferentCurrencyCodeError) do
       total_amt = currency - currency2
-    end                                           # => #<DifferentCurrencyCodeError: DifferentCurrencyCodeError>
+    end
   end
 
   def test_multiply_method
-    currency       = Currency.new(10, "USD")             # => #<Currency:0x007feded0b99a0 @amt_to_convert=10, @ccode="USD">
-    multiple       = 3                                   # => 3
-    expected       = 30                                  # => 30
-    actual         = currency.amt_to_convert * multiple  # => 30
-    assert_equal(30, actual)                             # => true
+    currency       = Currency.new(10, "USD")
+    multiple       = 3
+    expected       = 30
+    actual         = currency.amt_to_convert * multiple
+    assert_equal(30, actual)                             
   end
 end
