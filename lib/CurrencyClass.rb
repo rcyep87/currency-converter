@@ -19,9 +19,6 @@ class Currency
   def +(other)
     if other.is_a?(Currency)
       total_amt = Currency.new(@amt_to_convert + other.amt_to_convert, @ccode)
-      total_amt
-    else
-      puts "Error!"
     end
     # Currency.new(@amt_to_convert + other.amt_to_convert, @ccode)
   end
