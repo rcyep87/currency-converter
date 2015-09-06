@@ -42,9 +42,9 @@ class Currency
 
   def *(multiply)
     if multiply.is_a?(Currency)
-      raise DifferentCurrencyCodeError if multiply.is_a?(Float) == false &&
+      raise DifferentCurrencyCodeError if multiply.is_a?(Float) == false ||
       multiply._is_a?(Fixnum) == false
-      Currency.new(@amt_to_convert * multiply, @ccode)
+      new_convert = Currency.new(@amt_to_convert * multiply, @ccode)
     end
   end
 

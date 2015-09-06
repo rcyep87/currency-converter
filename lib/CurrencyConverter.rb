@@ -1,4 +1,4 @@
-require_relative '../lib/CurrencyClass.rb'
+require_relative '../lib/CurrencyClass.rb'  # => true
 
 class UnknownCurrencyCodeError
   def message
@@ -8,12 +8,15 @@ end
 
 class CurrencyConverter
 
-  attr_reader :ccode, :amt_to_convert, :currency_converter
+  attr_reader :currency_vals  # => nil
 
-  def initialize(amt_to_convert, ccode)
-    @currency_converter = {"USD" => 1.0, "EUR" => 0.74}
-    @amt_to_convert = rate
-    @ccode = ccode
+  def initialize
+    @currency_vals = { :USD => 1.0, :EUR => 0.74 }
+  end
+
+  def convert(initial_currency, new_ccode)
+    initial_currency = Currency.new(initial_currency, new_ccode)
+    new_currency = Currency.new(initial_currency.*(@currency_vals[new_ccode.to_sym]), new_ccode)
   end
 
 end
